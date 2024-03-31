@@ -1,29 +1,30 @@
 package com.registration.studentregistration.model;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Course {
+public class DetailTuition {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Integer idCourse;
 
-    @Column(length = 50)
-    private  String name;
+    private Integer idDetailTuition;
+    private String course;
+    private String classroom;
 
-    @Column(length = 50)
-    private String initials;
-
-
-    private  boolean state;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "id_tuition")
+    private Tuition tuition;
 }
